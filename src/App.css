@@ -1,0 +1,39 @@
+.nav-tabs {
+  background: #000000;
+}
+.nav-tabs {
+  list-style: none;
+  display: block;
+}
+.nav-tabs li {
+  display: inline-block;
+  text-transform: capitalize;
+}
+.nav-tabs li.active a{
+  background: #ff0000;
+}
+.nav-tabs li a,.nav-tabs li a:hover, .nav-tabs li a:active {
+  display: block;
+  padding: 10px 20px;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+.FormSection {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.mytab {
+  background: #F0F0F0;
+  padding: 15px;
+}
+.mytab h4{
+  text-transform: capitalize;
+}
+.btn{
+  text-transform: capitalize;
+}
+.error {
+  border: #e43444 1px solid;
+}

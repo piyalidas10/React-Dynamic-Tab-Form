@@ -1,0 +1,168 @@
+{
+    "register": {
+        "pageTitle": "register",
+        "formFields": [
+            {
+            "key": "firstName",
+            "input": "text",
+            "required": "required",
+            "valids": [{
+                "valid": "required",
+                "error": "firstName is required"
+            },
+            {
+                "valid": "pattern",
+                "validator": "^[a-zA-Z]+$",
+                "error": "firstName is accept only text"
+            },
+            {
+                "valid": "minlength",
+                "length": 3,
+                "error": "firstName must be at least 3 characters"
+            }
+            ]
+        },
+        {
+            "key": "middleName",
+            "input": "text",
+            "required": "",
+            "valids": [{
+                "valid": "required",
+                "error": "middleName is required"
+            },
+            {
+                "valid": "pattern",
+                "validator": "^[a-zA-Z]+$",
+                "error": "middleName is accept only text"
+            },
+            {
+                "valid": "minlength",
+                "length": 3,
+                "error": "middleName must be at least 3 characters"
+            }
+            ]
+        },
+        {
+            "key": "lastName",
+            "input": "text",
+            "required": "required",
+            "valids": [{
+                "valid": "required",
+                "error": "lastName is required"
+            },
+            {
+                "valid": "pattern",
+                "validator": "^[a-zA-Z]+$",
+                "error": "lastName is accept only text"
+            },
+            {
+                "valid": "minlength",
+                "length": 3,
+                "error": "lastName must be at least 3 characters"
+            }
+            ]
+        },
+        {
+            "key": "dob",
+            "input": "date",
+            "required": "",
+            "valids": []
+        },
+        {
+            "key": "gender",
+            "required": "required",
+            "input": "radio",
+            "items": [{
+                "name": "male",
+                "id": 0
+            },
+            {
+                "name": "female",
+                "id": 1
+            }
+            ],
+            "valids": []
+        },
+            {
+            "key": "emailId",
+            "input": "email",
+            "required": "required",
+            "valids": [{
+                "valid": "required",
+                "error": "emailId is required"
+            },
+            {
+                "valid": "emailId",
+                "error": "emailId must be valid"
+            }
+            ]
+        },
+        {
+            "key": "mobile",
+            "input": "number",
+            "required": "required",
+            "valids": [{
+                "valid": "required",
+                "error": "mobile is required"
+            },
+            {
+                "valid": "pattern",
+                "validator": "^[0-9]{10}$",
+                "error": "mobile is accept only number and maximum 10 numbers "
+            }
+            ]
+        },
+        {
+            "key": "password",
+            "input": "password",
+            "required": "required",
+            "valids": [{
+                "valid": "required",
+                "error": "password is required"
+            },
+            {
+                "valid": "minlength",
+                "length": 6,
+                "error": "Password must be at least 6 characters"
+            }
+            ]
+        }
+        ],
+        "btn": "register"
+    },
+    "login": {
+        "pageTitle": "login",
+        "formFields": [
+            {
+            "key": "emailId",
+            "input": "email",
+            "required": "required",
+            "valids": [{
+                "valid": "required",
+                "error": "emailId is required"
+            },
+            {
+                "valid": "emailId",
+                "error": "emailId must be valid"
+            }
+            ]
+        },
+        {
+        "key": "password",
+            "input": "password",
+            "required": "required",
+            "valids": [{
+                "valid": "required",
+                "error": "password is required"
+            },
+            {
+                "valid": "minlength",
+                "length": 6,
+                "error": "Password must be at least 6 characters"
+            }
+            ]
+        }
+        ],
+        "btn": "login"
+    }
+}
