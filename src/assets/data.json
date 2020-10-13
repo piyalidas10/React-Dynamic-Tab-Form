@@ -26,10 +26,7 @@
             "key": "middleName",
             "input": "text",
             "required": "",
-            "valids": [{
-                "valid": "required",
-                "error": "middleName is required"
-            },
+            "valids": [
             {
                 "valid": "pattern",
                 "validator": "^[a-zA-Z]+$",
