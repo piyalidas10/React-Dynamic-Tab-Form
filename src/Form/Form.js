@@ -4,7 +4,6 @@ import Formfield from '../Formfield/Formfield';
 class Form extends Component { 
     constructor(props) {
         super(props);
-        console.log(this.props);
         this.state= {
             formName: this.props.formName,
             formData: {},
@@ -12,32 +11,67 @@ class Form extends Component {
             allFormErrorTxt: '',
             allFormSuccessTxt: '',
             isSubmit: false,
-            isFormInvalid: false
+            isFormInvalid: false 
         };
+
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        console.log('---------------------------', props);
+        const getformData = {};
+        props.formFields.forEach(ele => {
+            Object.assign(getformData, {[ele.key]: ''});
+        });
+        if(state.formName !== props.formName && state.isFormInvalid) {
+            return {
+                isFormInvalid : false ,
+                isSubmit: false,
+                formName:  props.formName,
+                formData: getformData,
+            }
+        }
+        if(state.formName !== props.formName) {
+            return {
+                isSubmit: false,
+                formName:  props.formName,
+                formData: getformData,
+            }
+        }
+        return false;        
     }
 
     // submit the form logic
     formSubmit = (e) => {
         e.preventDefault();
         const {formFields} = this.props;
-        console.log('formData after submit => ', this.state.formData);
         let valuesOfRequiredFields = [];
+        // get the form
+        let formName = document.forms[this.props.formName];
+        console.log(formName);
         formFields.forEach(formElem => {
-            console.log('----------------------------------', formElem.valids.filter(ele => ele.valid === 'required'));
             if ((formElem.valids.filter(ele => ele.valid === 'required')).length > 0) {
-                valuesOfRequiredFields.push(this.state.formData[formElem.key]);
+                const fieldName = formElem.key;
+                console.log(fieldName);
+                // get the form element
+                if (formName) {
+                    let formElem = formName.elements[fieldName];
+                    console.log(formElem.value);
+                    if (formElem.value !== '') {
+                        valuesOfRequiredFields.push(formElem.value);
+                    } else {
+                        valuesOfRequiredFields.push(this.state.formData[fieldName]);
+                    }
+                }
             }
-            console.log('----------------------------------', valuesOfRequiredFields, this.state.formData[formElem.key]);
         });
+        console.log('formData after submit =>', valuesOfRequiredFields);
         const isFormInvalid = valuesOfRequiredFields.some(field => field === '');
-        console.log(isFormInvalid);
-        if (isFormInvalid && this.props.tabChange) {
+        if (isFormInvalid) {
             this.setState({
                 isFormInvalid: isFormInvalid,
                 allFormErrorTxt : 'Please fillup required fields',
                 isSubmit: true
             });
-            this.props.tabChangeHandler(false);
         } else {
             this.setState({
                 isFormInvalid: isFormInvalid,
@@ -49,7 +83,12 @@ class Form extends Component {
     }
 
     inputHandler = (fieldName, fieldValue) => {
-        console.log([fieldName], fieldValue);
+        console.log('inputHandler==>',fieldName);
+        const gedata = {
+                ...this.state.formData,
+                [fieldName]: fieldValue
+        }
+        console.log('gedata===>', gedata);
         this.setState({
             formData: {
                 ...this.state.formData,
@@ -60,17 +99,10 @@ class Form extends Component {
         });
     }
 
-    componentDidMount() {
-        const {formFields} = this.props;
-        formFields.forEach(ele => {
-            Object.assign(this.state.formData, {[ele.key]: ''});
-        });
-        console.log('---------------------------', formFields);
-    }
-
     render() 
     { 
         const {formFields} = this.props;
+        console.log('---------------------------', this.state.formData);
         return (
             <div>
                 {

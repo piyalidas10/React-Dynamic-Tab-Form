@@ -11,17 +11,14 @@ const Formfield = (props) => {
 
     const handleChange = (event, param) => {
         const { name } = event.target;
-        console.log('event => ', event);
         let checkValidationReturn = checkValidation(event, param);
         setCount(checkValidationReturn.error);
-        console.log({[name]: checkValidationReturn.value});
-        onInputHandler({[name]: checkValidationReturn.value});
+        onInputHandler(name, checkValidationReturn.value);
     };
 
     const checkValidation = (event, param) => {
         console.log(param);
         const { name, value } = event.target;
-        console.log('----------------------------------------------', value);
         let error = {};
         let requiredCheck, patternCheck, minlengthCheck, emailIdCheck;
         if (param) {
@@ -44,11 +41,6 @@ const Formfield = (props) => {
         }
         return {error, value};
     };
-
-    useEffect(() => {
-        // Update the document title using the browser API
-        return console.log('useEffect');
-    });
 
     if (Object.keys(count).length > 0)  {
         formClasses.push('error');
